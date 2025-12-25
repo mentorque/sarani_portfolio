@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown, MapPin } from "lucide-react";
-import saraniProfile from "@/assets/sarani-profile.jpeg";
 import heroBackground from "@/assets/hero-background-modern.jpg";
+
+const saraniProfile = "/sarani-new-profile.JPG";
 
 const HeroSection = () => {
   const scrollToContact = () => {
