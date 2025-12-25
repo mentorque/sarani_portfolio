@@ -46,30 +46,39 @@ const ContactSection = () => {
 
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {contactInfo.map((info, index) => (
-                <Card key={index} className="bg-[hsl(var(--skill-bg))] border-none shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="p-6 text-center">
-                    <div className="flex flex-col items-center space-y-4">
-                      <div className="flex-shrink-0">
-                        <info.icon className="w-8 h-8 text-[hsl(var(--primary))]" />
+              {contactInfo.map((info, index) => {
+                const cardContent = (
+                  <Card className={`bg-[hsl(var(--skill-bg))] border-none shadow-md hover:shadow-lg transition-all duration-300 ${info.href ? 'cursor-pointer hover:scale-105' : ''}`}>
+                    <CardContent className="p-6 text-center">
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="flex-shrink-0">
+                          <info.icon className="w-8 h-8 text-[hsl(var(--primary))]" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">{info.label}</h4>
+                          <p className="text-muted-foreground text-sm break-words">{info.value}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-2">{info.label}</h4>
-                        {info.href ? (
-                          <a 
-                            href={info.href}
-                            className="text-muted-foreground hover:text-[hsl(var(--primary))] transition-colors duration-200 text-sm break-words"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-muted-foreground text-sm">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                );
+
+                if (info.href) {
+                  return (
+                    <a
+                      key={index}
+                      href={info.href}
+                      target={info.href.startsWith('http') ? '_blank' : undefined}
+                      rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="block no-underline"
+                    >
+                      {cardContent}
+                    </a>
+                  );
+                }
+
+                return <div key={index}>{cardContent}</div>;
+              })}
             </div>
           </div>
         </div>

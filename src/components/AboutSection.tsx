@@ -10,8 +10,8 @@ const AboutSection = () => {
   ];
 
   const contactInfo = [
-    { icon: Phone, value: "+353-899651367" },
-    { icon: Mail, value: "saraninath.official@gmail.com" },
+    { icon: Phone, value: "+353-899651367", href: "tel:+353899651367" },
+    { icon: Mail, value: "saraninath.official@gmail.com", href: "mailto:saraninath.official@gmail.com" },
     { icon: MapPin, value: "Dublin, Ireland" },
     { icon: Linkedin, value: "LinkedIn", href: "https://www.linkedin.com/in/sarani-nath/" },
   ];
@@ -44,7 +44,12 @@ const AboutSection = () => {
                   <div key={index} className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-colors duration-200">
                     <contact.icon className="w-5 h-5 text-[hsl(var(--primary))]" />
                     {contact.href ? (
-                      <a href={contact.href} target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-[hsl(var(--primary))] transition-colors">
+                      <a 
+                        href={contact.href} 
+                        target={contact.href.startsWith('http') ? '_blank' : undefined}
+                        rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-foreground font-medium hover:text-[hsl(var(--primary))] transition-colors"
+                      >
                         {contact.value}
                       </a>
                     ) : (
